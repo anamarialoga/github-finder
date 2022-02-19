@@ -20,7 +20,7 @@ export const UserItem = ({user}) => {
                 <h2 className="card-title">
                 {user.login}
                 </h2>
-                <Link className='text-base-content text-opacity-40' to={`/users/${user.login}`}>Visit profile</Link>
+                <Link className='text-base-content text-opacity-40' to={`/user/${user.login}`}>Visit profile</Link>
             </div>
         </div>
     </div>

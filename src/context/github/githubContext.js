@@ -1,25 +1,25 @@
-import {createContext,  useReducer} from 'react';
+import {createContext,  useReducer, useState} from 'react';
 import React from 'react';
 import { GithubReducer } from './githubReducer';
 
 
+
 export const GithubContext = createContext();
 const GITHUB_URL = "https://api.github.com";
-const GITHUB_TOKEN = "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"
+const GITHUB_TOKEN = "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"
 
 export const GithubProvider = ({children}) => {
 
+    const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(false);
+
     const initState = {
         users:[],
-        loading: false
     }
     const [state, dispatch] = useReducer(GithubReducer, initState);
 
     const searchUsers = async (userToSearch) => {
-        dispatch({ 
-            type: 'SET_LOADING',
-            payload: true
-        })
+        setLoading(true);
         const newURLparams = new URLSearchParams ({q: userToSearch});
         const resp = await fetch(`${GITHUB_URL}/search/users?${newURLparams}`, 
         {headers : {
@@ -30,6 +30,26 @@ export const GithubProvider = ({children}) => {
             type: 'GET_USERS',
             payload: data.items
         })
+        setLoading(false);
+    }
+
+    const getUser = async (username) => {
+        setLoading(true);
+        const resp = await fetch(`${GITHUB_URL}/users/${username}`, 
+        {headers : {
+            Authorization: `token ${GITHUB_TOKEN}`
+        }});
+
+        if(resp.status === 404)
+        {
+            window.location='/notfound';
+        }
+        else{
+            const data = await resp.json(); 
+            setUser(data);
+            setLoading(false);
+            clearUsers();
+        }
     }
 
     const clearUsers = () => {
@@ -40,9 +60,10 @@ export const GithubProvider = ({children}) => {
 
     return <GithubContext.Provider value={{
         users: state.users,
-        loading: state.loading,
+        user,
+        loading,
         searchUsers,
-        clearUsers
+        getUser,
     }}>
         {children}
     </GithubContext.Provider>
