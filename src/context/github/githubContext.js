@@ -6,7 +6,7 @@ import { GithubReducer } from './githubReducer';
 
 export const GithubContext = createContext();
 const GITHUB_URL = "https://api.github.com";
-const GITHUB_TOKEN = "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"
+const GITHUB_TOKEN = "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"
 
 export const GithubProvider = ({children}) => {
 
