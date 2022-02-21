@@ -19,7 +19,7 @@ export const User = () => {
         getRepos(params.login);
     },[]);
 
-    //console.log(`The user is called: ${user.login}, having the following repos:`, repos);
+    //console.log(`The user is called: ${user.login}, having the following repos: `, repos);
     
         const {
         name,

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import {FaGithub} from 'react-icons/fa'
 import { Link } from "react-router-dom";
+import { GithubContext } from "../../context/github/githubContext";
 
 export const Navbar = () => {
+
+    const {clearUsers} = useContext(GithubContext);
+
     return (
         <nav className="navbar mb-12 shadow-lg bg-neutral text-neutral-content">
             <div className="container mx-auto">
@@ -14,7 +18,9 @@ export const Navbar = () => {
                 </div>
                 <div className="flex-1 px-2 mx-2">
                     <div className="flex justify-end">
-                        <Link to='/' className="btn btn-ghost btn-sm rounded-btn">Home</Link>
+                        <button onClick={()=> clearUsers()}>
+                            <Link to='/' className="btn btn-ghost btn-sm rounded-btn">Home</Link>
+                        </button>
                         <Link to='/about' className="btn btn-ghost btn-sm rounded-btn">About</Link>
                     </div>
                 </div>
