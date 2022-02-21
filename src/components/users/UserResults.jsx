@@ -6,7 +6,6 @@ import { UserItem } from "./UserItem";
 
 export const UserResults = () => {
     const {users, loading} = useContext(GithubContext);   
-    console.log(loading); 
   
   return (
       (loading )? <Loading /> :

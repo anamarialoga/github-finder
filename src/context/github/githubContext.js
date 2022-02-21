@@ -6,7 +6,7 @@ import { GithubReducer } from './githubReducer';
 
 export const GithubContext = createContext();
 const GITHUB_URL = "https://api.github.com";
-const GITHUB_TOKEN = "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"
+const GITHUB_TOKEN = "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"
 
 export const GithubProvider = ({children}) => {
 
@@ -15,6 +15,7 @@ export const GithubProvider = ({children}) => {
 
     const initState = {
         users:[],
+        repos: [],
     }
     const [state, dispatch] = useReducer(GithubReducer, initState);
 
@@ -48,8 +49,22 @@ export const GithubProvider = ({children}) => {
             const data = await resp.json(); 
             setUser(data);
             setLoading(false);
-            clearUsers();
         }
+    }
+
+    const getRepos = async (username) => {
+        setLoading(true);
+        const resp = await fetch (`https://api.github.com/users/${username}/repos`,
+        {headers : {
+            Authorization: `token ${GITHUB_TOKEN}`
+        }});
+
+        const data = await resp.json(); 
+        dispatch({
+            type: 'GET_REPOS',
+            payload: data,
+        })
+        setLoading(false);
     }
 
     const clearUsers = () => {
@@ -60,10 +75,13 @@ export const GithubProvider = ({children}) => {
 
     return <GithubContext.Provider value={{
         users: state.users,
+        repos: state.repos,
         user,
         loading,
         searchUsers,
+        getRepos,
         getUser,
+        clearUsers,
     }}>
         {children}
     </GithubContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect} from "react"
 import { GithubContext } from "../context/github/githubContext"
 import { RepoList } from "../components/repos/RepoList"
 import { useParams } from "react-router"
@@ -11,12 +11,15 @@ import { Loading } from "../components/shared/Loading"
 
 export const User = () => {
   
-    const {getUser, user, loading} = useContext(GithubContext)
+    const {getUser, user, loading, getRepos, repos} = useContext(GithubContext)
     const params = useParams();
 
     useEffect(()=> {
-        getUser(params.login) 
+        getUser(params.login);
+        getRepos(params.login);
     },[]);
+
+    //console.log(`The user is called: ${user.login}, having the following repos:`, repos);
     
         const {
         name,
@@ -161,7 +164,7 @@ export const User = () => {
                 </div>
             </div>
     
-            <RepoList  />
+             <RepoList repos={repos} /> 
             </div>
         </>
         )
