@@ -5,8 +5,8 @@ import { GithubReducer } from './githubReducer';
 
 
 export const GithubContext = createContext();
-const GITHUB_URL = "https://api.github.com";
-const GITHUB_TOKEN = "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"
+const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({children}) => {
 
@@ -22,7 +22,7 @@ export const GithubProvider = ({children}) => {
     const searchUsers = async (userToSearch) => {
         setLoading(true);
         const newURLparams = new URLSearchParams ({q: userToSearch});
-        const resp = await fetch(`${GITHUB_URL}/search/users?${newURLparams}`, 
+        const resp = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${newURLparams}`, 
         {headers : {
             Authorization: `token ${GITHUB_TOKEN}`
         }});
@@ -38,7 +38,7 @@ export const GithubProvider = ({children}) => {
         setLoading(true);
         const resp = await fetch(`${GITHUB_URL}/users/${username}`, 
         {headers : {
-            Authorization: `token ${GITHUB_TOKEN}`
+            Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
         }});
 
         if(resp.status === 404)
@@ -54,9 +54,9 @@ export const GithubProvider = ({children}) => {
 
     const getRepos = async (username) => {
         setLoading(true);
-        const resp = await fetch (`https://api.github.com/users/${username}/repos`,
+        const resp = await fetch (`${process.env.REACT_APP_GITHUB_URL}/users/${username}/repos`,
         {headers : {
-            Authorization: `token ${GITHUB_TOKEN}`
+            Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
         }});
 
         const data = await resp.json(); 
