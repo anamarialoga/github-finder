@@ -17,6 +17,7 @@ export const User = () => {
     useEffect(()=> {
         getUser(params.login);
         getRepos(params.login);
+        // eslint-disable-next-line 
     },[]);
 
     //console.log(`The user is called: ${user.login}, having the following repos: `, repos);
@@ -73,8 +74,11 @@ export const User = () => {
                     <p>{bio}</p>
                     <div className='mt-4 card-actions'>
                     <a
+                    // eslint-disable-next-line 
                         href={html_url}
+                    // eslint-disable-next-line 
                         target='_blank'
+                    // eslint-disable-next-line 
                         rel='noreferrer'
                         className='btn btn-outline'
                     >
@@ -95,8 +99,11 @@ export const User = () => {
                         <div className='stat-title text-md'>Website</div>
                         <div className='text-lg stat-value'>
                         <a
+                            // eslint-disable-next-line 
                             href={`https://${blog}`}
+                            // eslint-disable-next-line 
                             target='_blank'
+                            // eslint-disable-next-line 
                             rel='noreferrer'
                         >
                             {blog}
@@ -109,8 +116,11 @@ export const User = () => {
                         <div className='stat-title text-md'>Twitter</div>
                         <div className='text-lg stat-value'>
                         <a
+                            // eslint-disable-next-line 
                             href={`https://twitter.com/${twitter_username}`}
+                            // eslint-disable-next-line 
                             target='_blank'
+                            // eslint-disable-next-line 
                             rel='noreferrer'
                         >
                             {twitter_username}
