@@ -1,4 +1,4 @@
-#GitHub Finder App
+# GitHub Finder App
 
 * Tools & dependencies used:
     * react-scripts v3.4.1
