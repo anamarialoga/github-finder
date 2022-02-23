@@ -6,3 +6,5 @@
     * craco 
     * daisyui 
  
+* Deploying: 
+   * Vercel 
